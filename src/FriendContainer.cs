@@ -60,7 +60,6 @@ public class FriendContainer
 			Data += String.Format("{0} -> {1}\n", keys[i], values[i]);
 		}
 
-
         SendMessage(".\n" + Data);
     }
 }

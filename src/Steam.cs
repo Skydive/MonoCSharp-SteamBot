@@ -80,7 +80,7 @@ public class Steam
         new Callback<SteamClient.DisconnectedCallback>(ClientDisconnected, CallbackManagerInstance);
         new Callback<SteamUser.LoggedOnCallback>(UserLoggedOn, CallbackManagerInstance);
         new Callback<SteamUser.LoggedOffCallback>(UserLoggedOff, CallbackManagerInstance);
-        new JobCallback<SteamUser.UpdateMachineAuthCallback>(UserMachineAuth, CallbackManagerInstance);
+		new Callback<SteamUser.UpdateMachineAuthCallback>(UserMachineAuth, CallbackManagerInstance);
     }
 
     void UserAccountInfo(SteamUser.AccountInfoCallback callback)
@@ -177,7 +177,7 @@ public class Steam
         Console.WriteLine(String.Format("[ALERT] Logged off!"));
     }
 
-    void UserMachineAuth(SteamUser.UpdateMachineAuthCallback callback, JobID jobId)
+    void UserMachineAuth(SteamUser.UpdateMachineAuthCallback callback)
     {
         Console.WriteLine(String.Format("[ALERT] Updating sentryfile..."));
 
@@ -192,7 +192,7 @@ public class Steam
         // inform the steam servers that we're accepting this sentry file
         User.SendMachineAuthResponse(new SteamUser.MachineAuthDetails
         {
-            JobID = jobId,
+			JobID = callback.JobID,
 
             FileName = callback.FileName,
 
